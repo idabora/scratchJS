@@ -84,8 +84,7 @@ body {
     border-radius: 4px;
     border-left:5px solid orangered;
     background-color: var(--card-bg-color);
-}
-.map {
+}#map {
     flex: 70%;
     /* Occupy 70% of the available width */
     background-color: #a0a0a0;
