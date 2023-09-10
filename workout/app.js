@@ -1,4 +1,4 @@
-const map = document.querySelector('#map');
+ const map = document.querySelector('#map');
 const list = document.querySelector('.list');
 
 navigator.geolocation.getCurrentPosition((position) => {
@@ -83,7 +83,5 @@ navigator.geolocation.getCurrentPosition((position) => {
     });
 });
 
-
-
-
+nothing just a commit
 
