@@ -91,3 +91,9 @@ body {
     /* Optional background color for map */
     border: 2px solid rgb(205, 255, 23);
 }
+
+.leaflet-right .leaflet-control{
+
+    background-color: yellow;
+}
+
