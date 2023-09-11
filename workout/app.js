@@ -96,7 +96,3 @@ navigator.geolocation.getCurrentPosition((position) => {
     });
 });
 
-<<<<<<< HEAD
-
-=======
->>>>>>> changes
