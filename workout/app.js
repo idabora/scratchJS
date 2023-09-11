@@ -30,28 +30,41 @@ navigator.geolocation.getCurrentPosition((position) => {
         .setPopupContent('<h2>Hello, sir</h2>')
         .openPopup();
 
-    // Move the Routing control initialization outside the click event handler
-    const control = L.Routing.control({
+    function routing(...cords){ L.Routing.control({
         waypoints: [
-            L.latLng(17.41892923667908, 78.4374396965176), // Starting point
-            L.latLng(17.41458666629159, 78.44535761787373) // Ending point
+            L.latLng(cords[0],cords[1]), // Starting point
+            L.latLng(cords[2], cords[3]), // Ending point
+            // L.latLng(cords[4], cords[5]), // Ending point
+            // L.latLng(cords[6], cords[7]), // Ending point
+            // L.latLng(cords[8], cords[9]), // Ending point
+            // L.latLng(cords[10], cords[11]) // Ending point
+           
         ],
-        routeWhileDragging: true
+        routeWhileDragging: true,
+        // showAlternatives:true,
+        // routeWhileDragging:true
     }).addTo(mapObject);
-
+    }
+    const p1=[];
     mapObject.on('click', (pos) => {
         console.log(pos)
         const { lat, lng } = pos.latlng;
+        p1.push(lat)
+        p1.push(lng)
+        console.log(p1.length)
+        if (p1.length===4) {
+            routing(...p1)
+        }
         L.marker([lat, lng], { icon: customIcon })
             .addTo(mapObject)
             .bindPopup(L.popup({
                 maxWidth: 400,
-                maxHeight: 300, // Fixed the typo here
+                maxHeight: 300,
                 autoClose: false,
                 closeOnClick: false
             }))
-            .setPopupContent('<h2>Hello, sir</h2>')
-            .openPopup();
+            // .setPopupContent('<h2>Hello, sir</h2>')
+            // .openPopup();
 
         const card = document.createElement('div');
         card.classList.add('card');
@@ -83,4 +96,7 @@ navigator.geolocation.getCurrentPosition((position) => {
     });
 });
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> changes
