@@ -83,5 +83,4 @@ navigator.geolocation.getCurrentPosition((position) => {
     });
 });
 
-nothing just a commit
 
