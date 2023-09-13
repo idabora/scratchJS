@@ -1,4 +1,4 @@
- const map = document.querySelector('#map');
+const map = document.querySelector('#map');
 const list = document.querySelector('.list');
 
 navigator.geolocation.getCurrentPosition((position) => {
@@ -48,8 +48,14 @@ navigator.geolocation.getCurrentPosition((position) => {
     }).addTo(mapObject);
 
    
-    const card = document.createElement('div');
+        const card = document.createElement('div');
+
+        const cardForm= document.createElement('form');
+        cardForm.classList.add('cardForm');
+        cardForm.setAttribute('onSubmit','submitFunc()');
+
         card.classList.add('card');
+        card.appendChild(cardForm);
         list.appendChild(card);
 
         const exercise = document.createElement('select');
@@ -70,7 +76,19 @@ navigator.geolocation.getCurrentPosition((position) => {
         option4.innerText = "Cycling";
         option4.setAttribute('value', 'Cycling');
 
-        card.appendChild(exercise);
+        const time=document.createElement('input');
+        time.setAttribute('type','time');
+        time.classList.add('time');
+
+        const submit=document.createElement('input');
+        submit.setAttribute('onsubmit','submitFunc()');
+        submit.setAttribute('value','submit');
+        submit.setAttribute('type','submit');
+
+
+        cardForm.appendChild(exercise);
+        cardForm.appendChild(time);
+        cardForm.appendChild(submit);
         exercise.appendChild(option1);
         exercise.appendChild(option2);
         exercise.appendChild(option3);
@@ -90,44 +108,13 @@ navigator.geolocation.getCurrentPosition((position) => {
         if (p1.length===4) {
             routing(...p1)
         }
-        // L.marker([lat, lng], { icon: customIcon })
-        //     .addTo(mapObject)
-        //     .bindPopup(L.popup({
-        //         maxWidth: 400,
-        //         maxHeight: 300,
-        //         autoClose: false,
-        //         closeOnClick: false
-        //     }))
-            // .setPopupContent('<h2>Hello, sir</h2>')
-            // .openPopup();
 
-        // const card = document.createElement('div');
-        // card.classList.add('card');
-        // list.appendChild(card);
-
-        // const exercise = document.createElement('select');
-        // exercise.classList.add('exercise-type');
-        // const option1 = document.createElement('option');
-        // option1.innerText = "Workout";
-        // option1.setAttribute('value', '');
-
-        // const option2 = document.createElement('option');
-        // option2.innerText = "Walk";
-        // option2.setAttribute('value', 'Walk');
-
-        // const option3 = document.createElement('option');
-        // option3.innerText = "Sprint";
-        // option3.setAttribute('value', 'Sprint');
-
-        // const option4 = document.createElement('option');
-        // option4.innerText = "Cycling";
-        // option4.setAttribute('value', 'Cycling');
-
-        // card.appendChild(exercise);
-        // exercise.appendChild(option1);
-        // exercise.appendChild(option2);
-        // exercise.appendChild(option3);
-        // exercise.appendChild(option4);
     });
 });
+
+function submitFunc(){
+    console.log(`Exercise: ${document.querySelector('exercise-type').innerText}`)
+}
+
+
 
