@@ -23,7 +23,7 @@ navigator.geolocation.getCurrentPosition((position) => {
     L.marker([latitude, longitude], { icon: customIcon }).addTo(mapObject)
         .bindPopup(L.popup({
             maxWidth: 400,
-            maxHeight: 300, // Fixed the typo here
+            maxHeight: 300, 
             autoClose: false,
             closeOnClick: false
         }))
@@ -52,7 +52,6 @@ navigator.geolocation.getCurrentPosition((position) => {
 
         const cardForm= document.createElement('form');
         cardForm.classList.add('cardForm');
-        cardForm.setAttribute('onSubmit','submitFunc()');
 
         card.classList.add('card');
         card.appendChild(cardForm);
@@ -60,6 +59,7 @@ navigator.geolocation.getCurrentPosition((position) => {
 
         const exercise = document.createElement('select');
         exercise.classList.add('exercise-type');
+
         const option1 = document.createElement('option');
         option1.innerText = "Workout";
         option1.setAttribute('value', '');
@@ -76,24 +76,41 @@ navigator.geolocation.getCurrentPosition((position) => {
         option4.innerText = "Cycling";
         option4.setAttribute('value', 'Cycling');
 
-        const time=document.createElement('input');
-        time.setAttribute('type','time');
-        time.classList.add('time');
-
-        const submit=document.createElement('input');
-        submit.setAttribute('onsubmit','submitFunc()');
-        submit.setAttribute('value','submit');
-        submit.setAttribute('type','submit');
-
-
-        cardForm.appendChild(exercise);
-        cardForm.appendChild(time);
-        cardForm.appendChild(submit);
         exercise.appendChild(option1);
         exercise.appendChild(option2);
         exercise.appendChild(option3);
         exercise.appendChild(option4);
 
+        cardForm.appendChild(exercise);
+
+        const startTime=document.createElement('input');
+        startTime.setAttribute('type','time');
+        startTime.classList.add('startTime');
+
+        cardForm.appendChild(startTime);
+
+        const endTime=document.createElement('input');
+        endTime.setAttribute('type','time');
+        endTime.classList.add('endTime');
+
+        cardForm.appendChild(endTime);
+
+        const submit=document.createElement('input');
+        submit.setAttribute('value','submit');
+        submit.setAttribute('type','submit');
+        
+        cardForm.appendChild(submit);
+
+        cardForm.addEventListener('submit',(e)=>{
+            e.preventDefault();
+            const selectedExercise = document.querySelector('.exercise-type').value;
+            const startTime = document.querySelector('.startTime').value;
+            const endTime = document.querySelector('.endTime').value;
+            console.log(`Exercise: ${selectedExercise}`);
+            console.log(`Start Time: ${startTime}`);
+            console.log(`Start Time: ${endTime}`);
+        })
+        
     }
     const p1=[];
     mapObject.on('click', (pos) => {
@@ -112,9 +129,6 @@ navigator.geolocation.getCurrentPosition((position) => {
     });
 });
 
-function submitFunc(){
-    console.log(`Exercise: ${document.querySelector('exercise-type').innerText}`)
-}
 
 
 
