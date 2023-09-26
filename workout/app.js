@@ -183,7 +183,7 @@ class App {
 
                 points.push(lat);
                 points.push(lng);
-                console.log(")()()()()()",points)
+                console.log("())()()()()()",points)
                 if(points.length===4){
                     console.log(points)
                     this.routingFunc(...points);
@@ -281,7 +281,6 @@ class App {
         ],
         routeWhileDragging: true,
         // showAlternatives:true,
-        // routeWhileDragging:true
     }).addTo(this.#mapObject);
 
     }
