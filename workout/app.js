@@ -176,10 +176,21 @@ class App {
             .openPopup();
              console.log("hello");
             
+            let points=[];
             this.#mapObject.on('click',(pos)=>{
                 const {lat,lng}=pos.latlng;
                 console.log(lat,lng);
-                this.showForm(lat,lng)
+
+                points.push(lat);
+                points.push(lng);
+                console.log(")()()()()()",points)
+                if(points.length===4){
+                    console.log(points)
+                    this.routingFunc(...points);
+                    points=[];
+                    this.showForm(lat,lng)
+                }
+
              })
 
     }
@@ -246,11 +257,32 @@ class App {
             const selectedExercise = document.querySelector('.exercise-type').value;
             const startTime = document.querySelector('.startTime').value;
             const endTime = document.querySelector('.endTime').value;
+
+            localStorage.setItem('Exercise',selectedExercise);
+            localStorage.setItem('startsAt',startTime);
+            localStorage.setItem('endsAt',endTime);
+
             console.log(`Exercise: ${selectedExercise}`);
             console.log(`Start Time: ${startTime}`);
             console.log(`Start Time: ${endTime}`);
         })
 
+
+
+
+    }
+
+    routingFunc(...coords){
+
+        L.Routing.control({
+        waypoints: [
+            L.latLng(coords[0],coords[1]), // Starting point
+            L.latLng(coords[2], coords[3]), // Ending point
+        ],
+        routeWhileDragging: true,
+        // showAlternatives:true,
+        // routeWhileDragging:true
+    }).addTo(this.#mapObject);
 
     }
 
