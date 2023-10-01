@@ -6,29 +6,36 @@ xhr.open('GET', 'https://cat-fact.herokuapp.com/facts')
 console.log(xhr.readyState);
 let responseData;
 
-xhr.send();
-console.log(xhr.readyState);
+// Way-1
 xhr.onreadystatechange = () => {
-
-    // console.log(xhr.readyState);
+    
     responseData = xhr.responseText;
-
-    // console.log(responseData);
-    const x = JSON.parse(responseData);
-    // console.log(x);
-    // console.log(responseData)
-    // let x=responseData.map((obj)=>JSON.parse(obj))
+    responseData=JSON.parse(responseData)
+    const x = responseData.map((obj)=>JSON.stringify(obj));
     console.log(x);
-    // const y= x.map((obj) =>JSON.parse(obj))
-    // console.log(y);
-    document.querySelector('.container').innerText = JSON.stringify(x);
-    console.log(x[0].status);
-    // document.querySelector('.container').innerText = x.map((obj) =>JSON.parse(obj))
+    // console.log(responseData);
+
+    document.querySelector('.container').innerText =x;
 }
 
-// console.log(responseData)
-// console.log(data)
+// console.log(this.responseData)
 
+//Way-2
+// xhr.onload=()=>{
+//     console.log(xhr.readyState);
+//     console.log("&",xhr.status)
+// }
+
+// Way-3
+// xhr.addEventListener('load',()=>{
+    
+//     console.log(xhr.status);
+//     console.log(xhr.readyState);
+//     console.log(xhr.response);
+// })
+
+xhr.send();
+console.log(xhr.readyState);
 
 
 
