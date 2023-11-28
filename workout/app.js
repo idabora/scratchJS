@@ -192,7 +192,7 @@ class App {
                 }
 
              })
-
+            console.log('hacktoberfest')
     }
 
 
@@ -284,7 +284,7 @@ class App {
     }).addTo(this.#mapObject);
 
     }
-
+    console.log("REMOVE THIS LATER");
 }
 
 const abc = new App;
