@@ -33,29 +33,51 @@ navigator.geolocation.getCurrentPosition((pos)=>{
     lat=pos.coords.latitude;
     long=pos.coords.longitude;
     // console.log(lat,long)
-    whereAmI(123232,long)
+    whereAmI( -33.933, 18.474)
 })
 
 function whereAmI(lat,lng){
     console.log(lat,lng);
-    xhr.open('GET',`https://geocode.xyz/${lat},${lng}?geoit=json&auth=571234818854172749325x114338`)
-        .then((resp)=>{
-            if(!resp){
-                console.error("****Cant Find Any Information****")
-            }
+//     xhr.open('GET',`https://geocode.xyz/${lat},${lng}?geoit=json&auth=571234818854172749325x114338`)
+//         .then((resp)=>{
+//             if(!resp){
+//                 console.error("****Cant Find Any Information****")
+//             }
             
-            xhr.onreadystatechange=()=>{
-                console.log(xhr.readyState);
-                // console.log(xhr.responseText);
-                let data=xhr.responseText;
-                console.log(JSON.parse(data));
-            }
-        }).catch((err)=>{
-            console.log(err)
-        })
+//             xhr.onreadystatechange=()=>{
+//                 console.log(xhr.readyState);
+//                 // console.log(xhr.responseText);
+//                 let data=xhr.responseText;
+//                 console.log(JSON.parse(data));
+//             }
+//         }).catch((err)=>{
+//             console.log(err)
+//         })
 
 
-    xhr.send();
+//     xhr.send();
 
+// }
+
+fetch(`https://geocode.xyz/${lat},${lng}?geoit=json&auth=571234818854172749325x114338`)
+    .then((resp)=>{
+        console.log(resp)
+        if(!resp.ok){
+            console.error(resp);
+        }
+        return resp.json();
+    }).then((data)=>{
+        console.log(data);
+        console.log(`The State is ${data.state} and the City is ${data.city}....`)
+
+        // return fetch(`https://restcountries.eu/rest/v2/name/${data.country}`)
+        return data.country;
+
+    }).catch((err)=>{
+        console.error(err)
+    }).then((cData)=>{
+        console.log(`The Country is ${cData}.`)
+    }).catch((err)=>{
+        console.error(err)
+    })
 }
-
